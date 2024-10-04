@@ -1,24 +1,24 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Versions:
 
-Things you may want to cover:
+* Ruby version: 3.3.0
 
-* Ruby version
+* Rails version: 7.2.1
 
-* System dependencies
+* Node version: 18.20.4
 
-* Configuration
+* Database: postgreSQL
 
-* Database creation
 
-* Database initialization
+Install Guide:
 
-* How to run the test suite
+* $ npm install
 
-* Services (job queues, cache servers, search engines, etc.)
+* $ rails db:create
 
-* Deployment instructions
+* $ rails db:migrate
+
+* $ rails server
 
 * ...
