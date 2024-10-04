@@ -1,0 +1,99 @@
+<div class="container">
+  <%= turbo_frame_tag "step4_frame" do %>  
+    <div class="row">
+      <div class="col-md-7">
+        <embed src="<%= url_for(@invoice.pdf) %>" width="100%" height="600px" type="application/pdf">
+      </div>
+
+      <div class="col-md-5">
+        <%= form_with url: add_invoice_details_path(invoice_id: @invoice.id), local: true, data: { turbo_frame: 'step4_frame' }, id: "invoiceForm" do |form| %>
+          <div class="form-group message">
+            <p class="title">Add additional inovice details</p>
+            <p class="content">Please transfer all needed inovice information lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dignissim nulla ipsum.</p>
+          </div>
+
+          <div class="wrap">
+            <p class="title">Invocing company</p>
+
+            <div class="form-group">
+              <%= form.label :country, "Country" %>
+              <%= form.select :country, options_for_select([['Germany', 'Germany'], ['Canada', 'Canada']]), {}, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= form.label :vat_number, "VAT ID or tax-number" %>
+              <%= form.text_field :vat_number, class: "form-control", required: true %>
+            </div>
+            <div class="form-group">
+              <%= form.label :company_name, "Company name" %>
+              <%= form.text_field :company_name, class: "form-control", required: true %>
+            </div>
+            <div class="form-group">
+              <%= form.label :invoice_date, "Invoice date" %>
+              <%= form.date_field :invoice_date, class: "form-control", value: @invoice.invoice_date, required: true %>
+            </div>
+            <div class="form-group">
+              <%= form.label :invoice_number, "Invoice number" %>
+              <%= form.text_field :invoice_number, class: "form-control", required: true %>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-8">
+                <%= form.label :street_name, "Street name" %>
+                <%= form.text_field :street_name, class: "form-control", required: true %>
+              </div>
+              <div class="form-group col-md-4">
+                <%= form.label :street_number, "Street number" %>
+                <%= form.text_field :street_number, class: "form-control", required: true %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-4">
+                <%= form.label :postal_code, "Postal Code" %>
+                <%= form.text_field :postal_code, class: "form-control", required: true %>
+              </div>
+              <div class="form-group col-md-8">
+                <%= form.label :city, "City" %>
+                <%= form.text_field :city, class: "form-control", required: true %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= form.check_box :has_word, { checked: @invoice.has_word }, local: true, class: "form-control checkbox-field" %>
+              <%= form.label :has_word, "The invoice has the word 'invoice' on it" %>
+            </div>
+          </div>
+
+          <%= turbo_frame_tag "line_item_list" do %>
+            <%= render partial: 'line_items/line_item', collection: @invoice.line_items, as: :line_item %>
+          <% end %>
+
+          <div class="wrap">
+            <p class="title">Totals</p>
+            <div class="form-group">
+              <div class="left_div">Subtotal</div>
+              <div class="right_div">2460,14</div>
+            </div>
+            <div class="form-group">
+              <div class="left_div">VAT 7% on 0,0</div>
+              <div class="right_div">0,0</div>
+            </div>
+            <div class="form-group">
+              <div class="left_div">VAT 19% on 8,40</div>
+              <div class="right_div">172,21</div>
+            </div>
+            <div class="form-group">
+              <div class="left_div title">Total EUR</div>
+              <div class="right_div title">2632,35</div>
+            </div>
+          </div>
+
+          <div class="actions next_btn_wrap">
+            <%= form.submit 'Go To Next Step ➜', class: "btn btn-primary mt-3 next_btn" %>
+          </div>
+        <% end %>
+
+        <%= form_with url: add_line_item_path(invoice_id: @invoice.id), local: true, data: { turbo_frame: 'line_item_list' } do |form| %>
+          <%= form.submit '✚ Add Line Item', class: "btn btn-secondary mt-3 add_item_btn" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

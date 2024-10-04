@@ -1,0 +1,126 @@
+<div class="container">
+  <%= turbo_frame_tag "step3_frame" do %>  
+    <div class="row">
+      <div class="col-md-7">
+        <embed src="<%= url_for(@invoice.pdf) %>" width="100%" height="600px" type="application/pdf">
+      </div>
+
+      <div class="col-md-5">
+        <%= form_with url: verify_booking_path(invoice_id: @invoice.id), local: true, data: { turbo_frame: 'step3_frame' }, id: "invoiceForm" do |form| %>
+          <div class="form-group message">
+            <p class="title">Verify the booking</p>
+            <p class="content">Please make sure that all of the following information is correctly shown on the received invoice.</p>
+          </div>
+
+          <div class="wrap">
+            <p class="title">Location Invoice Company</p>
+            <div class="form-group">
+              <%= form.check_box :germany_residence, { checked: @invoice.germany_residence }, class: "form-control checkbox-field" %>
+              <%= form.label :germany_residence, "The invocing company also resides in Germany" %>
+            </div>
+          </div>
+
+          <div class="wrap">
+            <p class="title">Booking Information</p>
+            <div class="form-group">
+              <div class="left_div">Name of hotel</div>
+              <div class="right_div">Motel One</div>
+            </div>
+            <div class="form-group">
+              <div class="left_div">Name of first traveller</div>
+              <div class="right_div">Diana Alfonsi-Pobner</div>
+            </div>
+            <div class="form-group">
+              <div class="left_div">Check-in date</div>
+              <div class="right_div">17.04.2024</div>
+            </div>
+            <div class="form-group">
+              <div class="left_div">Check-out date</div>
+              <div class="right_div">19.04.2024</div>
+            </div>
+            <div class="form-group underline"></div>
+            <div class="form-group">
+              <%= form.check_box :booking_confirmation, { checked: false }, class: "form-control checkbox-field" %>
+              <%= form.label :booking_confirmation, "All information above is correctly shown on invoice", class: "checkbox-field" %>
+            </div>
+          </div>
+
+          <div class="wrap">
+            <p class="title">Receiving Company</p>
+            <div class="form-group">
+              <div class="left_div">Name of company</div>
+              <div class="right_div">Klambt Verlag GmbH & Co. Kg</div>
+            </div>
+            <div class="form-group">
+              <div class="left_div">Additional address information</div>
+              <div class="right_div">-</div>
+            </div>
+            <div class="form-group">
+              <div class="left_div">Street name</div>
+              <div class="right_div">Rotweg.</div>
+            </div>
+            <div class="form-group">
+              <div class="left_div">Postal code</div>
+              <div class="right_div">76532</div>
+            </div>
+            <div class="form-group">
+              <div class="left_div">City</div>
+              <div class="right_div">Baden-Baden</div>
+            </div>
+            <div class="form-group">
+              <div class="left_div">Country</div>
+              <div class="right_div">Germany</div>
+            </div>
+            <div class="form-group underline"></div>
+            <div class="form-group">
+              <%= form.check_box :receiving_confirmation, { checked: false }, class: "form-control checkbox-field" %>
+              <%= form.label :receiving_confirmation, "All information above is correctly shown on invoice", class: "checkbox-field" %>
+            </div>
+          </div>
+
+          <div class="actions next_btn_wrap">
+            <%= form.submit 'Go To Next Step ➜', class: "btn btn-primary mt-3", id: "submitBtn" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<!-- JavaScript for Validation -->
+<script>
+  document.getElementById('invoiceForm').addEventListener('submit', function(event) {
+    document.querySelectorAll('.checkbox-field').forEach(function(checkbox) {
+      checkbox.classList.remove('is-invalid');
+    });
+
+    const bookingConfirmationChecked = document.getElementById('booking_confirmation').checked;
+    const receivingConfirmationChecked = document.getElementById('receiving_confirmation').checked;
+
+    let isValid = true;
+
+    if (!bookingConfirmationChecked) {
+      const checkbox = document.getElementById('booking_confirmation');
+      checkbox.classList.add('is-invalid');
+      const label = checkbox.nextElementSibling;
+      if (label) {
+        label.classList.add('is-invalid');
+      }
+      isValid = false;
+    }
+
+    if (!receivingConfirmationChecked) {
+      const checkbox = document.getElementById('receiving_confirmation');
+      checkbox.classList.add('is-invalid');
+      const label = checkbox.nextElementSibling;
+      if (label) {
+        label.classList.add('is-invalid');
+      }
+      isValid = false;
+    }
+
+    if (!isValid) {
+      event.preventDefault();
+    }
+  });
+</script>

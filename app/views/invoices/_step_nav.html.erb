@@ -1,0 +1,9 @@
+<div class="container mt-5">
+  <div class="steps">
+    <span class="step-label <%= 'active' if current_step == 1 %> <%= 'checked' if current_step > 1 %>"><span class="number"><%= current_step > 1 ? "✓" : "1" %></span>Attach PDF</span>
+    <span class="step-label <%= 'active' if current_step == 2 %> <%= 'checked' if current_step > 2 %>"><span class="number"><%= current_step > 2 ? "✓" : "2" %></span>Connect booking item</span>
+    <span class="step-label <%= 'active' if current_step == 3 %> <%= 'checked' if current_step > 3 %>"><span class="number"><%= current_step > 3 ? "✓" : "3" %></span>Verify booking</span>
+    <span class="step-label <%= 'active' if current_step == 4 %> <%= 'checked' if current_step > 4 %>"><span class="number"><%= current_step > 4 ? "✓" : "4" %></span>Add invoice details</span>
+    <span class="step-label <%= 'active' if current_step == 5 %>"><span class="number">5</span>Connect charges</span>
+  </div>
+</div>

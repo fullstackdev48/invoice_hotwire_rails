@@ -1,0 +1,123 @@
+ /*
+ *= require_tree .
+ *= require_self
+ */
+ @import "bootstrap";
+
+ /* Add custom styles here */
+.container {
+  margin-top: 50px;
+}
+
+.is-invalid {
+  color: red;
+}
+
+embed {
+  border-radius: 3px;
+}
+
+.steps {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #ADB5BD;
+}
+
+.steps .number {
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  background-color: #ADB5BD;
+  color: white;
+  border-radius: 50%;
+  margin-right: 10px;
+  padding: 4px;
+  font-size: 11px;
+}
+
+.step-label {
+  flex-grow: 1;
+  text-align: center;
+  padding: 10px;
+  color: gray;
+  text-decoration: none;
+}
+
+.step-label.active {
+  color: #0D6EFD;
+}
+
+.step-label.checked {
+  color: black;
+}
+
+.step-label.active .number {
+  background-color: #0D6EFD;
+}
+
+.step-label.checked .number {
+  background-color: green;
+}
+
+.message {
+  background-color: #CFF4FC;
+  padding: 20px;
+  border-radius: 3px;
+  color: #1D6472;
+  font-size: 14px;
+}
+
+.message .title {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.wrap {
+  border: 1px solid #ADB5BD;
+  margin-top: 20px;
+  border-radius: 3px;
+  padding: 20px;
+}
+
+.wrap .title {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.wrap label {
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.wrap .left_div {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.wrap .right_div {
+  display: inline-block;
+  float: right;
+}
+
+.wrap .underline {
+  border-bottom: 1px solid ADB5BD;
+  margin: 20px 0px 20px;
+}
+
+.remove_btn {
+  margin-top: 20px;
+}
+
+.add_item_btn {
+  margin-top: -5px!important;
+}
+
+.next_btn {
+  margin-bottom: -140px!important;
+}
+
+.next_btn_wrap {
+  text-align: right;
+}

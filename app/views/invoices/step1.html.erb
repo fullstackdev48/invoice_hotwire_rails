@@ -1,0 +1,28 @@
+<%= turbo_frame_tag "step_nav" do %>
+  <%= render 'invoices/step_nav', current_step: 1 %>
+<% end %>
+
+<div class="container">
+  <%= turbo_frame_tag "step1_frame" do %>
+      <%= form_with model: @invoice, url: attach_pdf_path, local: true, multipart: true, data: { turbo_frame: 'step1_frame' } do |form| %>
+        <% if @invoice.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@invoice.errors.count, "error") %> prohibited this invoice from being saved:</h2>
+            <ul>
+              <% @invoice.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="form-group">
+          <%= form.file_field :pdf, class: "form-control", required: true %>
+        </div>
+        <div class="actions next_btn_wrap">
+          <%= form.submit 'Go To Next Step ➜', class: "btn btn-primary mt-3" %>
+        </div>
+      <% end %>
+  <% end %>
+</div>
+    

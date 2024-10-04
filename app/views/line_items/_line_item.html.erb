@@ -1,0 +1,55 @@
+<div class="wrap nested-fields" id="line_item_<%= line_item.id %>">
+  <p class="title">Line item</p>
+  
+  <div class="row">
+    <div class="form-group col-md-12">
+      <label>Name of traveler</label>
+      <input class="form-control" type="text" name="invoice[line_items_attributes][<%= line_item.id %>][traveler_name]">
+    </div>
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label>Start date</label>
+        <input class="form-control" type="date" name="invoice[line_items_attributes][<%= line_item.id %>][start_date]">
+      </div>
+      <div class="form-group col-md-6">
+        <label>End date</label>
+        <input class="form-control" type="date" name="invoice[line_items_attributes][<%= line_item.id %>][end_date]">
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <label>Description</label>
+      <input class="form-control" type="text" name="invoice[line_items_attributes][<%= line_item.id %>][description]">
+    </div>
+    <div class="form-group col-md-12">
+      <label>Category</label>
+      <select class="form-control" name="invoice[line_items_attributes][<%= line_item.id %>][category]">
+        <option value="Category1">Category1</option>
+        <option value="Category2">Category2</option>
+      </select>
+    </div>
+    <div class="form-group col-md-12">
+      <label>Quantity</label>
+      <input step="1" class="form-control" type="number" name="invoice[line_items_attributes][<%= line_item.id %>][quantity]">
+    </div>
+    <div class="row">
+      <div class="form-group col-md-4">
+        <label>Unit</label>
+        <input class="form-control" type="text" name="invoice[line_items_attributes][<%= line_item.id %>][unit]">
+      </div>
+      <div class="form-group col-md-4">
+        <label>Price</label>
+        <input step="0.01" class="form-control" type="number" name="invoice[line_items_attributes][<%= line_item.id %>][price]">
+      </div>
+      <div class="form-group col-md-4">
+        <label>VAT rate</label>
+        <select class="form-control" name="invoice[line_items_attributes][<%= line_item.id %>][vat_rate]">
+          <option value="Incl. 19%">Incl. 19%</option>
+          <option value="Incl. 18%">Incl. 7%</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <%= button_to 'Remove line item', remove_line_item_path(line_item.id), method: :delete, class: "btn btn-danger remove-item remove_btn", data: { turbo_frame: "line_items" } %>
+    </div>
+  </div>
+</div>
